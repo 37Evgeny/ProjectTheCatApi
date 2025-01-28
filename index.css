@@ -68,3 +68,15 @@ button:hover {
 #gallery-container img:hover {
     transform: scale(1.1);
 }
+
+#clearAllButton {
+    background-color: #f80202; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 20px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}

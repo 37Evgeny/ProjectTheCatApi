@@ -1,6 +1,7 @@
 const fetchCatButton = document.getElementById('fetch-cat-button');
 const catContainer = document.getElementById('cat-container');
 const galleryContainer = document.getElementById('gallery-container');
+const clearAllButton = document.getElementById('clearAllButton');
 //создаем массив для хранения изображений
 let catImages = [];
 
@@ -45,6 +46,12 @@ function displayGallery() {
         });
     });
 }
+
+  // Добавляем обработчик события для кнопки очистки
+  clearAllButton.addEventListener('click', () => {
+    catImages = []; // Очищаем массив изображений
+    displayGallery(); // Обновляем галерею
+});
 
 // Добавляем обработчик событий для кнопки
 fetchCatButton.addEventListener('click', fetchCat);
