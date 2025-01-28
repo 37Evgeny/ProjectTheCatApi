@@ -19,7 +19,7 @@ h1 {
 }
 
 button {
-    background-color: #4CAF50; /* Зеленый цвет */
+    background-color: #4CAF50; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -32,6 +32,15 @@ button {
 
 button:hover {
     background-color: #45a049; /* Темнее при наведении */
+}
+
+.card__delete:hover {
+    display: block;
+}
+
+#cat-container {
+    position: relative;
+    overflow: hidden;
 }
 
 #cat-container img {
