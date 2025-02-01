@@ -21,6 +21,7 @@ async function fetchCat() {
         // Сохраняем изображение в галерею
         catImages.push(imgUrl);
         console.log(imgUrl)
+        // обновляем галерею
         displayGallery();
     } catch (error) {
         console.error('Ошибка получения изображения:', error);
@@ -32,8 +33,9 @@ function displayCat(imgUrl) {
     catContainer.innerHTML = `<img src="${imgUrl}" alt="Cute Cat">`;
 }
 
-
+// функция добавления в галерею
 function displayGallery() {
+    // проходим по массиву объектов 
     galleryContainer.innerHTML = catImages.map((item, index) => `
         <div class="gallery-item">
             <img src="${item.url}" alt="Cat" data-index="${index}" style="max-width: 100px; margin: 5px; cursor: pointer;">
@@ -49,6 +51,7 @@ function displayGallery() {
             catImages[index].likes++; // Увеличиваем количество лайков
             displayGallery(); // Обновляем галерею
         });
+
     });
 
     // добавляем обработчик события клика на каждое изображение
@@ -59,6 +62,7 @@ function displayGallery() {
             const index = event.target.getAttribute('data-index');
             // Удаляем изображение из массива и обновляем галерею
             catImages.splice(index, 1);
+             // обновляем галерею
             displayGallery();
         });
     });
@@ -69,6 +73,32 @@ function displayGallery() {
     catImages = []; // Очищаем массив изображений
     displayGallery(); // Обновляем галерею
 });
+
+ // function to set a given theme/color-scheme
+ function setTheme(themeName) {
+    localStorage.setItem('theme', themeName);
+    document.documentElement.className = themeName;
+}
+
+// функция переключения темы
+function toggleTheme() {
+    if (localStorage.getItem('theme') === 'theme-dark') {
+        setTheme('theme-light');
+    } else {
+        setTheme('theme-dark');
+    }
+}
+
+// Immediately invoked function to set the theme on initial load
+(function () {
+    if (localStorage.getItem('theme') === 'theme-dark') {
+        setTheme('theme-dark');
+        document.getElementById('slider').checked = false;
+    } else {
+        setTheme('theme-light');
+      document.getElementById('slider').checked = true;
+    }
+})();
 
 // Добавляем обработчик событий для кнопки
 fetchCatButton.addEventListener('click', fetchCat);

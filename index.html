@@ -8,12 +8,19 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>Галерея котиков</h1>
-    <button id="fetch-cat-button">Загрузить изображение котика</button>
-    <div id="cat-container"></div>
-    <h2>Галерея</h2>
-    <div id="gallery-container"></div>
-    <button id="clearAllButton">Очистить</button>
+    <div class="container">
+        <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+        </label>
+        <h1>Галерея котиков</h1>
+        <button id="fetch-cat-button">Загрузить изображение котика</button>
+        <div id="cat-container"></div>
+        <h2>Галерея</h2>
+        <div id="gallery-container"></div>
+        <button id="clearAllButton">Очистить</button>
+    </div>
+   
     <script src="index.js"></script>
 </body>
 </html>
