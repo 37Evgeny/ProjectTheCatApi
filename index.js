@@ -10,12 +10,17 @@ async function fetchCat() {
     try {
         const response = await fetch('https://api.thecatapi.com/v1/images/search');
         const data = await response.json();
-        const imgUrl = data[0].url;
-        
+        console.log(data)
+        //создаем объект
+        const imgUrl = {
+            url:data[0].url,
+            likes: 0
+        }
         // Отображаем текущее изображение
-        displayCat(imgUrl);
+        displayCat(imgUrl.url);
         // Сохраняем изображение в галерею
         catImages.push(imgUrl);
+        console.log(imgUrl)
         displayGallery();
     } catch (error) {
         console.error('Ошибка получения изображения:', error);
@@ -29,10 +34,22 @@ function displayCat(imgUrl) {
 
 
 function displayGallery() {
-    //Генерирует HTML для каждого изображения, добавляя атрибут data-index, чтобы хранить индекс изображения в массиве.
-    galleryContainer.innerHTML = catImages.map((url, index) => 
-        `<img src="${url}" alt="Cat" data-index="${index}" style="max-width: 100px; margin: 5px; cursor: pointer;">`
-    ).join('');
+    galleryContainer.innerHTML = catImages.map((item, index) => `
+        <div class="gallery-item">
+            <img src="${item.url}" alt="Cat" data-index="${index}" style="max-width: 100px; margin: 5px; cursor: pointer;">
+            <div class="like-button" data-index="${index}">${item.likes} ❤️</div>
+        </div>
+    `).join('');
+
+    // Добавление обработчиков событий для кнопок "лайк"
+    const likeButtons = galleryContainer.querySelectorAll('.like-button');
+    likeButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const index = event.target.getAttribute('data-index');
+            catImages[index].likes++; // Увеличиваем количество лайков
+            displayGallery(); // Обновляем галерею
+        });
+    });
 
     // добавляем обработчик события клика на каждое изображение
     const images = galleryContainer.querySelectorAll('img');
